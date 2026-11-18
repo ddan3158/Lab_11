@@ -30,7 +30,7 @@ int main(){
         std::exit(1);
     }
 
-    std::ifstream fout;
+    std::ofstream fout;
     std::string fileName;
     std::cout<<"Enter file name: ";
     std::cin>>fileName;
