@@ -34,34 +34,31 @@ namespace YooDaeun2693185{
         {
             testID(); testscore(); testgrade();
         }
-        void input(){
+
+        void input(std::istream& is = std::cin){
             std::cout<<"enter name: ";
-            std::getline(std::cin>>std::ws, name);//std::cin>>name;//>>std::ws줄바꿈 무시
+            std::getline(is>>std::ws, name);//std::cin>>name;//>>std::ws줄바꿈 무시
             std::cout<<"enter ID: ";
-            std::cin>>ID; testID();
+            is>>ID; testID();
             std::cout<<"enter score: ";
-            std::cin>>score; testscore();
+            is>>score; testscore();
             std::cout<<"enter grade: ";
-            std::cin>>grade; testgrade();
+            is>>grade; testgrade();
         }
         friend std::istream& operator>>(std::istream& is, Student& s){
-            std::cout<<"Enter name: ";
-            std::getline(is>> std::ws, s.name);
-            std::cout<<"Enter ID: ";
-            is>>s.ID; s.testID();
-            std::cout<<"Enter Score: ";
-            is>>s.score; s.testscore();
-            std::cout<<"Enter Grade: ";
-            is>>s.grade; s.testgrade();
+            s.input(is);
             return is;}//input의 std::cin을 is로
 
-        void print() const{
-            std::cout<<name<<" ("<<ID<<")"<<", "<<score<<", "<<grade<<"\n";
+        void print(std::ostream& os = std::cout) const{
+            os<<name<<" ("<<ID<<")"<<", ";
+            os.width(3); os.fill('0');
+            os<<score<<", "<<grade<<"\n";
         };
         friend std::ostream& operator<<(std::ostream& os, const Student& s){
-            os<<s.name<<" ("<<s.ID<<")"<<", "<<s.score<<", "<<s.grade<<"\n";
+            s.print(os);
             return os;
         }
+
         void setname(const std::string& n){name=n;}
         void setID(int newID){
             ID=newID;
@@ -75,6 +72,7 @@ namespace YooDaeun2693185{
             grade=newgrade;
             testgrade();
         }
+
        const std::string getline() const{
             return name;
         }
@@ -87,6 +85,7 @@ namespace YooDaeun2693185{
         char getgrade() const{
             return grade;
         };
+
         //전위증가연산자
         //intPair: x, y //intPair a;  a++; //x++, y++
         //Student s; s++; //++score
